@@ -95,13 +95,13 @@ public class TravellerService {
         }
 
         //prepare response and return
-       return travelCardConverter.travelCard2TravelCardResponseConverter.apply(travelCard);
+       return travelCardConverter.convert(travelCard);
 
     }
 
     public TravelCardResponse checkCardDetail(String cardNumber) {
         TravelCard travelCard = inMemoryCardTransactionRepository.findCardByCardNumber(cardNumber);
-        return travelCardConverter.travelCard2TravelCardResponseConverter.apply(travelCard);
+        return travelCardConverter.convert(travelCard);
     }
 
     public List<String> fetchAllCard() {
