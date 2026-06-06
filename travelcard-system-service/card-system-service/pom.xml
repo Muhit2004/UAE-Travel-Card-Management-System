@@ -20,7 +20,7 @@
 
 
             <sonar.organization>muhit2004</sonar.organization>
-
+        <sonar.coverage.exclusions>**/config/**/*,**/TravelcardsystemApplication.java</sonar.coverage.exclusions>
     </properties>
     <dependencies>
         <dependency>
