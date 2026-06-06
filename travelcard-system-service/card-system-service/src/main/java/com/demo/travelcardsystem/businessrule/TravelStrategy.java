@@ -86,14 +86,14 @@ public class TravelStrategy {
     };
 
     public RuleCollection loadAllBusinessRules() {
-        anyWhereInZoneOneStrategy.accept(2.50);
-        anyOneZoneOutsideZoneOneStrategy.accept(2.00);
-        anyTwoZoneIncludingZoneOneStrategy.accept(3.00);
-        anyTwoZoneExcludingZoneOneStrategy.accept(2.25);
-        anyThreeZoneStrategy.accept(3.20);
-        anyJourneyByBus.accept(1.80, TransportType.BUS);
+        anyWhereInZoneOneStrategy.accept(Fares.INSIDE_ZONE_ONE);
+        anyOneZoneOutsideZoneOneStrategy.accept(Fares.OUTSIDE_ZONE_ONE);
+        anyTwoZoneIncludingZoneOneStrategy.accept(Fares.TWO_ZONE_INCLUDING_ZONE_ONE);
+        anyTwoZoneExcludingZoneOneStrategy.accept(Fares.TWO_ZONE_EXCLUDING_ZONE_ONE);
+        anyThreeZoneStrategy.accept(Fares.THREE_ZONE);
+        anyJourneyByBus.accept(Fares.JOURNEY_BY_BUS, TransportType.BUS);
 
-        this.ruleCollection.setMaxFare(3.20);
+        this.ruleCollection.setMaxFare(Fares.MAX_FARE);
 
         return this.ruleCollection;
     }
