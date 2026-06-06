@@ -1,13 +1,16 @@
 package com.demo.travelcardsystem;
 
+import com.demo.travelcardsystem.config.TravelcardsystemApplication;
 import com.demo.travelcardsystem.constant.TransportType;
 import com.demo.travelcardsystem.entity.TravelCard;
 import com.demo.travelcardsystem.model.request.SwipeRequest;
 import com.demo.travelcardsystem.repository.InMemoryCardTransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Component;
 
 @Component
+@SpringBootTest(classes = TravelcardsystemApplication.class)
  class  TravelHelperTest {
 
     @Autowired

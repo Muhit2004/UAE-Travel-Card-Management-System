@@ -1,5 +1,6 @@
 package com.demo.travelcardsystem;
 
+import com.demo.travelcardsystem.config.TravelcardsystemApplication;
 import com.demo.travelcardsystem.constant.TransportType;
 import com.demo.travelcardsystem.entity.Station;
 import com.demo.travelcardsystem.entity.TravelCard;
@@ -12,13 +13,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
+@SpringBootTest(classes = TravelcardsystemApplication.class)
+@Import(TravelHelperTest.class)
  class CheckinCheckoutTest extends IntegrationTest {
 
     @Autowired
@@ -95,5 +99,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
     }
 
+   @DisplayName("Get all stations and verify their zone mappings")
+   @Test
+   void should_return_all_stations_with_correct_zones() throws Exception {
+      mockMvc.perform(get("/api/stations"))
+              .andExpect(status().isOk())
+              .andExpect(jsonPath("$").isArray())
+              .andExpect(jsonPath("$.length()").value(4))
+              .andExpect(jsonPath("$[?(@.name == 'Algubaiba')].zones[0]").value("ONE"))
+              .andExpect(jsonPath("$[?(@.name == 'Jumeirah')].zones").value(org.hamcrest.Matchers.hasItems(
+                      org.hamcrest.Matchers.hasItems("ONE", "TWO"))));
+   }
 
 }

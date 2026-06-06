@@ -1,5 +1,6 @@
 package com.demo.travelcardsystem;
 
+import com.demo.travelcardsystem.config.TravelcardsystemApplication;
 import com.demo.travelcardsystem.entity.TravelCard;
 import com.demo.travelcardsystem.repository.InMemoryCardTransactionRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,6 +11,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.stream.Stream;
@@ -20,7 +23,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
+@SpringBootTest(classes = TravelcardsystemApplication.class)
+@Import(TravelHelperTest.class)
 class RechargeTravelCardTests extends IntegrationTest{
 
     @Autowired
