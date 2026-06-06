@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
- class  TravelHelperTest {
+class  TravelHelperTest {
 
     @Autowired
     private InMemoryCardTransactionRepository inMemoryCardTransactionRepository;
@@ -30,10 +30,5 @@ import org.springframework.stereotype.Component;
         travelCard.setBalance(amount);
 
        return inMemoryCardTransactionRepository.registerNewCard(travelCard);
-    }
-
-    @org.junit.jupiter.api.Test
-    void structuralSanityCheck() {
-        org.junit.jupiter.api.Assertions.assertNotNull(inMemoryCardTransactionRepository); // added a dummy test
     }
 }
