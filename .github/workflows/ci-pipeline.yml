@@ -28,14 +28,16 @@ jobs:
         cache: maven
 
     - name: Compile and Run Unit Tests
-      # This command automatically finds and runs CheckinCheckoutTest, RechargeTravelCardTests, and TravelHelperTest
-      run: mvn -f travelcard-system-service/card-system-service/pom.xml clean test
+      # This tells the cloud server to "cd" into your backend folder first!
+      working-directory: ./travelcard-system-service/card-system-service
+      run: mvn clean test
 
     - name: SonarCloud Code Quality Scan
+      # We do the exact same thing here for the scanner
+      working-directory: ./travelcard-system-service/card-system-service
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: >
         mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar 
         -Dsonar.projectKey=Muhit2004_UAE-Travel-Card-Management-System
-        -pl travelcard-system-service/card-system-service
