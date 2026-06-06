@@ -10,6 +10,7 @@ import com.demo.travelcardsystem.model.request.CardRegistrationRequest;
 import com.demo.travelcardsystem.model.request.SwipeRequest;
 import com.demo.travelcardsystem.model.response.TravelCardResponse;
 import com.demo.travelcardsystem.repository.InMemoryCardTransactionRepository;
+import com.demo.travelcardsystem.repository.StationRepository;
 import com.demo.travelcardsystem.service.util.TravelCardConverter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ public class TravellerService {
 
     private InMemoryCardTransactionRepository inMemoryCardTransactionRepository;
     private TravelCardConverter travelCardConverter;
+    private StationRepository stationRepository;
 
     /**
      * This method register new user/card in the system
@@ -70,7 +72,7 @@ public class TravellerService {
         if(null == swipeRequest.getTransportType()) throw new InvalidDataProvidedException();
 
         TravelCard travelCard = inMemoryCardTransactionRepository.findCardByCardNumber(swipeRequest.getCardNumber());
-        Station station = inMemoryCardTransactionRepository.findStationByName(swipeRequest.getStationName());
+        Station station = stationRepository.findStationByName(swipeRequest.getStationName());
         if (null != travelCard.getCurrentJourney()) { // Cardholder is in-transit
             // set the end-station in Current Journey of TravelCard
             travelCard.getCurrentJourney().setEndStation(station);

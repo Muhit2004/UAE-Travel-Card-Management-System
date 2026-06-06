@@ -19,7 +19,6 @@ public class InMemoryCardTransactionRepository {
 
     // Key is cardNumber
     private ConcurrentMap<String, TravelCard> travelCardStore = new ConcurrentHashMap<>();
-    private Set<Station> stationStore = new HashSet<>();
 
     public TravelCard registerNewCard(TravelCard travelCard) {
         // Check if card already exists. Then throw exception
@@ -39,19 +38,6 @@ public class InMemoryCardTransactionRepository {
         return travelCard;
     }
 
-    public Station findStationByName(String stationName) {
-       return stationStore.stream().filter(station -> station.getName().equals(stationName)).findAny()
-               .orElseThrow(InvalidDataProvidedException::new);
-    }
-
-    public boolean addAllStationsToStationStore(Set<Station> stations) {
-        clearStationStore();
-        return stationStore.addAll(stations);
-    }
-
-    public void clearStationStore() {
-        stationStore.clear();
-    }
 
     public void clearTravelCardStore() {
         travelCardStore.clear();
