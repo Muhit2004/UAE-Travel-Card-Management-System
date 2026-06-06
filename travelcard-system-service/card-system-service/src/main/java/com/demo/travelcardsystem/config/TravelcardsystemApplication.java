@@ -13,8 +13,10 @@ import java.util.Set;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication(scanBasePackages = {"com.demo.travelcardsystem"})
+@SpringBootApplication
+@ComponentScan(basePackages = "com.demo.travelcardsystem")
 public class TravelcardsystemApplication{
 
     public static void main(String[] args) {
