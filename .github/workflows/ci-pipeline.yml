@@ -7,6 +7,9 @@ on:
   pull_request:
     branches: [ "sprint-1" ]
 
+permissions:
+  contents: read
+
 jobs:
   build-and-analyze:
     runs-on: ubuntu-latest
