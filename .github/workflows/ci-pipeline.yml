@@ -7,6 +7,9 @@ on:
   pull_request:
     branches: [ "sprint-1" ]
 
+permissions:
+  contents: read
+
 jobs:
   build-and-analyze:
     runs-on: ubuntu-latest
@@ -26,7 +29,7 @@ jobs:
 
     - name: Compile and Run Unit Tests
       # This command automatically finds and runs CheckinCheckoutTest, RechargeTravelCardTests, and TravelHelperTest
-      run: mvn clean test -pl travelcard-system-service/card-system-service
+      run: mvn -f travelcard-system-service/card-system-service/pom.xml clean test
 
     - name: SonarCloud Code Quality Scan
       # To make this step work, you will need to link your GitHub repo to a free SonarCloud account
@@ -34,6 +37,5 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: >
-        mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar 
+        mvn -f travelcard-system-service/card-system-service/pom.xml -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
         -Dsonar.projectKey=UAE-Travel-Card-System
-        -pl travelcard-system-service/card-system-service
